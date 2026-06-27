@@ -235,7 +235,7 @@
     .project-links a:hover { color: var(--accent); border-color: var(--accent); }
 
     /* ===== CONTACT ===== */
-    #contact-section { text-align: center; }
+    #contact { text-align: center; }
     #contact-email {
       font-size: 1.5rem;
       font-weight: 700;
@@ -606,7 +606,7 @@
   <section id="hero">
     <div class="hero-copy">
       <p class="greeting">👋 Hello, I'm</p>
-      <h1><span id="hero-name">Your Name</span></h1>
+      <h1><span id="hero-name">Hariprasath</span></h1>
       <p id="hero-tagline">A short catchy tagline describing what you do.</p>
       <div class="hero-cta">
         <a href="#projects" class="btn-primary">View My Work</a>
@@ -640,10 +640,10 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact-section">
+  <section id="contact">
     <p class="section-label">Contact</p>
     <h2 class="section-title">Let's Talk</h2>
-    <a id="contact-email" href="#">your@email.com</a>
+    <a id="contact-email" href="mailto:vhariprasath2005@gmail.com">vhariprasath2005@gmail.com</a>
     <p id="contact-note">Open to freelance, full-time, and collaboration opportunities.</p>
     <div class="social-links" id="social-links-render"></div>
   </section>
@@ -828,18 +828,71 @@
 const DEFAULTS = {
   password: 'hari2005',
   name: 'Hariprasath',
-  navName: 'Hari.',
-  tagline: 'Full-stack developer crafting clean, scalable web experiences.',
-  about: "Hi! I'm Hariprasath — a passionate developer ",
-  skills: ['Java','C','JavaScript','React','Python','Figma','Git'],
+  navName: 'ForgeAlly.',
+  tagline: 'Building intelligent software solutions through code, embedded systems, and machine learning.',
+  about: "Hi! I'm Hariprasath —  a software developer passionate about building intelligent, scalable, and user-focused solutions. My interests span software engineering, embedded systems, and machine learning, where I enjoy transforming complex ideas into practical applications. I believe in writing clean, maintainable code, solving challenging problems, and continuously learning to stay ahead in the evolving technology landscape. Driven by innovation and a growth mindset, I strive to create technology that delivers meaningful impact while continuously refining my skills as a developer.",
+  skills: ['Java','C','C++','Python','HTML','CSS','JavaScript','React','AIML','Figma','Git','Embedded Systems','Arduino','Raspberry Pi','ESP32','STM32','Canva','Pandas'],
   projects: [
-    
+    {
+      title: 'Mental Health Monitering System',
+      desc: "The EEG-Based Mental Health Monitoring System is designed to analyze brain signals and identify a person's mental state using machine learning. EEG data is collected through sensors, preprocessed to remove noise, and converted into meaningful features for analysis. The trained model classifies the user's condition into categories such as normal, stressed, or anxious. The predicted results are displayed through a monitoring interface, enabling real-time observation of mental health. This project combines signal processing, machine learning, and healthcare technology to support early detection and improve awareness of mental well-being.",
+      tags: ['AIML','Python','Pandas','Electrodes','Arduino','Flutter'],
+    },
+    {
+      title: 'Anomaly Detection and Alert System for Autonomous Vehicle',
+      desc: "The Anomaly Detection System for Autonomous Vehicles enhances vehicle safety by identifying unusual events in the surrounding environment using computer vision and machine learning. A Raspberry Pi with a camera continuously captures live video, while OpenCV processes each frame for analysis. The trained model detects anomalies such as unexpected human movement, obstacles, or suspicious objects. When an anomaly is detected, the system captures an image and generates an alert for the monitoring dashboard. This project integrates embedded systems, image processing, and AI to improve real-time safety and surveillance.",
+      tags: ['AIML','Camera Module','OpenCV','Raspberry Pi','Python','Pandas'],
+    },
+    {
+      title: 'Servo Prediction Using Machine Learning',
+      desc: "The Servo Prediction System uses machine learning to predict the position of a servo motor based on historical data. The dataset is preprocessed by handling missing values, encoding categorical variables, and selecting relevant features before training the prediction model. Algorithms analyze patterns related to input signals, motor behavior, and environmental factors to estimate the servo's position accurately. The predicted results help improve control systems and enhance the performance of robotic applications. This project demonstrates practical knowledge of data preprocessing, predictive analytics, machine learning, and data-driven decision-making for engineering applications.",
+      tags: ['AIML','Python','Pandas'],
+      github: 'https://github.com/Hariprasath-03/AIML/blob/main/PROJECT_2_SERVO_PREDICTION.ipynb'
+    },
+    {
+      title: 'White Wine Quality Prediction Using Machine Learning',
+      desc: "The White Wine Quality Prediction System uses machine learning to predict the quality of white wine based on its physicochemical properties. The dataset is preprocessed by handling missing values, scaling numerical features, and selecting relevant attributes before training the prediction model. Machine learning algorithms analyze factors such as acidity, sugar content, pH, alcohol content, and sulphates to estimate the wine quality accurately. The predicted results help support quality assessment and decision-making in the food and beverage industry. This project demonstrates practical knowledge of data preprocessing, classification techniques, model evaluation, and predictive analytics using machine learning.",
+      tags: ['AIML','Python','Pandas'],
+      github: 'https://github.com/Hariprasath-03/AIML/blob/main/White_wine_quality_prediction.ipynb'
+    },
+    {
+      title: 'Big Sales Prediction',
+      desc: "The Big Sales Prediction System uses machine learning to forecast future product sales based on historical retail data. The dataset is preprocessed by handling missing values, encoding categorical variables, and selecting relevant features before training the prediction model. Algorithms analyze patterns related to products, outlets, and customer demand to estimate future sales accurately. The predicted results help businesses optimize inventory management, reduce stock shortages, and improve strategic planning. This project demonstrates practical knowledge of data preprocessing, predictive analytics, machine learning, and data-driven decision-making for business applications.",
+      tags: ['AIML','Python','Pandas'],
+      github: 'https://github.com/Hariprasath-03/AIML/blob/main/PROJECT_BIG_SALES_PREDICTION.ipynb'
+    },
+    {
+      title: 'Smart Digital Alarm Clock Using Arduino',
+      desc: "The Smart Digital Alarm Clock Using Arduino is an embedded systems project designed to display real-time clock information, monitor environmental conditions, and provide customizable alarm functionality. The system integrates an Arduino Uno, 16×2 LCD, DHT22 temperature and humidity sensor, buzzer, LED, push buttons, and a potentiometer. Users can set the current time, configure alarms, and use the snooze feature through dedicated control buttons. When the alarm is triggered, the buzzer and LED provide audio and visual alerts, while the LCD displays the time and environmental readings. This project demonstrates practical knowledge of Arduino programming, sensor interfacing, embedded system design, and real-time hardware control.",
+      tags: ['Wokwi','Arduino','Buzzer','DHT22 Sensor'],
+      live: 'https://wokwi.com/projects/448023519948706817'
+    },
+    {
+      title: 'Quiz Buzzer System Using ESP32',
+      desc: "The Quiz Buzzer System Using ESP32 is an embedded systems project designed to manage quiz competitions by identifying the first participant to press the buzzer. The system uses an ESP32, push buttons, buzzer, LED indicators, and relay modules to control participant responses. When a contestant presses the buzzer first, the corresponding LED and relay are activated while all other buttons are automatically disabled, ensuring fair and accurate response detection. The system provides instant audio and visual feedback, making it suitable for quiz contests and educational events. This project demonstrates practical knowledge of ESP32 programming, digital input/output control, relay interfacing, and real-time embedded system design.",
+      tags: ['Wokwi','ESP32','Buzzer','LED'],
+      live: 'https://wokwi.com/projects/446715304335588353'
+    },
+    {
+      title: 'Heart Rate Monitoring System Using ESP32',
+      desc: "The Heart Rate Monitoring System Using ESP32 is an IoT-based embedded systems project designed to monitor a user's heart rate in real time using a pulse sensor. The system integrates an ESP32, pulse sensor, and 16×2 I2C LCD to measure and display the heart rate in beats per minute (BPM). The ESP32 continuously reads sensor data, compares it with predefined threshold values, and displays warning messages when the heart rate falls below or exceeds the normal range. This project demonstrates practical knowledge of ESP32 programming, biomedical sensor interfacing, real-time data processing, and embedded system development for healthcare applications.",
+      tags: ['Wokwi','ESP32','Pulse Sensor','LCD'],
+      live: 'https://wokwi.com/projects/446715281093898241'
+    },
+    {
+      title: 'Distance Measurement System Using Ultrasonic Sensor',
+      desc: "The Distance Measurement System Using Ultrasonic Sensor is an embedded systems project designed to measure the distance between the sensor and nearby objects in real time. The system integrates an Arduino Uno, HC-SR04 ultrasonic sensor, and an LED indicator. The ultrasonic sensor transmits sound waves and calculates the distance based on the time taken for the echo to return. The measured distance is displayed through the Serial Monitor, while the LED turns on when an object is detected within a predefined range. This project demonstrates practical knowledge of Arduino programming, ultrasonic sensor interfacing, real-time distance measurement, and embedded system development.",
+      tags: ['Wokwi','Ultrasonic Sensor','Arduino'],
+      live: 'https://wokwi.com/projects/446713131004192769'
+    }
   ],
   email: 'vhariprasath2005@gmail.com',
   contactNote: 'Open to freelance, full-time, and collaboration opportunities.',
   footer: '© 2026 Hariprasath. Built with ❤️',
   socials: [
-    { label: 'GitHub', url: '[github.com](https://github.com/Hariprasath-03)' }
+    { label: 'GitHub', url: 'https://github.com/Hariprasath-03' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/hariprasathv03?utm_source=share_via&utm_content=profile&utm_medium=member_android' },
+    { label: 'LeetCode', url: 'https://leetcode.com/u/hariprasathv_03/' }
   ]
 };
 
