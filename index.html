@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a24;
+      --surface2: #22222f;
+      --accent: #6c63ff;
+      --accent2: #ff6584;
+      --text: #e8e8f0;
+      --muted: #8888aa;
+      --border: #2e2e40;
+      --radius: 12px;
+      --font: 'Segoe UI', system-ui, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    img { max-width: 100%; }
+    button {
+      cursor: pointer;
+      border: none;
+      font-family: var(--font);
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(15,15,19,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1.2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    #admin-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.4rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    #admin-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== MAIN SECTIONS ===== */
+    main { padding-top: 60px; }
+    section {
+      padding: 5rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    h2.section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      color: var(--text);
+    }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: calc(100vh - 60px);
+      display: grid;
+      grid-template-columns: minmax(320px, 1.1fr) minmax(260px, 0.9fr);
+      align-items: stretch;
+      gap: 30.5rem;
+      padding-top: 3rem;
+    }
+    .hero-copy {
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+    #hero-photo {
+      width: 200%;
+      max-width: 820px;
+      max-height: calc(100vh - 110px);
+      border-radius: 28px;
+      object-fit: cover;
+    }
+    #hero .greeting {
+      font-size: 0.95rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    #hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    #hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #hero-tagline {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--accent); transform: translateY(-1px); }
+
+    /* ===== ABOUT ===== */
+    #about-text {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      max-width: 680px;
+    }
+
+    /* ===== SKILLS ===== */
+    #skills-grid {
+      display: flex; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .skill-tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .skill-tag:hover { border-color: var(--accent); }
+
+    /* ===== PROJECTS ===== */
+    #projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .project-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .project-card h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+    .project-card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+    .project-tag {
+      font-size: 0.75rem;
+      background: rgba(108,99,255,0.15);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+    }
+    .project-links { display: flex; gap: 0.75rem; }
+    .project-links a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.75rem;
+      border-radius: 5px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .project-links a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ===== CONTACT ===== */
+    #contact-section { text-align: center; }
+    #contact-email {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+    }
+    #contact-note { color: var(--muted); margin-bottom: 2rem; }
+    .social-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+    .social-link {
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+    }
+    .social-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* ===== OVERLAY / MODAL BASE ===== */
+    .overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 1000;
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.active { display: flex; }
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+    }
+    .modal h3 { font-size: 1.2rem; margin-bottom: 1.5rem; }
+    .close-btn {
+      position: absolute; top: 1rem; right: 1rem;
+      background: none; color: var(--muted);
+      font-size: 1.3rem; line-height: 1;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .close-btn:hover { color: var(--text); background: var(--surface2); }
+
+    /* ===== FORM ELEMENTS ===== */
+    .form-group { margin-bottom: 1rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 0.6rem 0.85rem;
+      font-family: var(--font);
+      font-size: 0.92rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-error { color: var(--accent2); font-size: 0.82rem; margin-top: 0.3rem; display: none; }
+    .btn-full {
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      padding: 0.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+      transition: opacity 0.2s;
+    }
+    .btn-full:hover { opacity: 0.88; }
+
+    /* ===== ADMIN PANEL ===== */
+    #admin-panel {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--bg);
+      z-index: 300;
+      overflow-y: auto;
+    }
+    #admin-panel.active { display: block; }
+    .admin-nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      position: sticky; top: 0; z-index: 10;
+    }
+    .admin-nav-title {
+      font-weight: 700; font-size: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .admin-nav-title span {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .admin-nav-actions { display: flex; gap: 0.75rem; }
+    .btn-save {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.45rem 1.2rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: opacity 0.2s;
+    }
+    .btn-save:hover { opacity: 0.88; }
+    .btn-danger {
+      background: transparent;
+      border: 1px solid #ff4466;
+      color: #ff4466;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: background 0.2s;
+    }
+    .btn-danger:hover { background: rgba(255,68,102,0.1); }
+    .btn-secondary {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      transition: border-color 0.2s;
+    }
+    .btn-secondary:hover { border-color: var(--accent); }
+
+    .admin-body {
+      display: flex;
+      min-height: calc(100vh - 58px);
+    }
+    .admin-sidebar {
+      width: 200px;
+      min-width: 200px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1.5rem 0;
+    }
+    .admin-sidebar-item {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: color 0.15s, background 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .admin-sidebar-item:hover { color: var(--text); background: var(--surface2); }
+    .admin-sidebar-item.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(108,99,255,0.08);
+    }
+    .admin-content {
+      flex: 1;
+      padding: 2rem;
+      max-width: 800px;
+    }
+    .admin-section { display: none; }
+    .admin-section.active { display: block; }
+    .admin-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.35rem;
+    }
+    .admin-section .subtitle {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 1.75rem;
+    }
+
+    /* project list in admin */
+    .project-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .project-list-item {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem;
+    }
+    .project-list-item-info { flex: 1; }
+    .project-list-item-info strong { font-size: 0.95rem; }
+    .project-list-item-info p { font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem; }
+    .project-list-actions { display: flex; gap: 0.5rem; }
+    .btn-edit {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.35rem 0.85rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      transition: border-color 0.2s;
+    }
+    .btn-edit:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-del {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.35rem 0.85rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    .btn-del:hover { border-color: #ff4466; color: #ff4466; }
+
+    /* skills in admin */
+    .skills-admin-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.25rem; }
+    .skill-admin-tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.88rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .skill-remove {
+      background: none; border: none;
+      color: var(--muted); cursor: pointer;
+      font-size: 1rem; line-height: 1;
+      padding: 0; margin: 0;
+      transition: color 0.15s;
+    }
+    .skill-remove:hover { color: #ff4466; }
+    .skill-add-row { display: flex; gap: 0.75rem; }
+    .skill-add-row input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 0.6rem 0.85rem;
+      font-family: var(--font);
+      font-size: 0.92rem;
+      outline: none;
+    }
+    .skill-add-row input:focus { border-color: var(--accent); }
+
+    /* social links admin */
+    .social-admin-list { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1rem; }
+    .social-admin-item {
+      display: flex; gap: 0.5rem; align-items: center;
+    }
+    .social-admin-item input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      padding: 0.55rem 0.85rem;
+      font-family: var(--font);
+      font-size: 0.88rem;
+      outline: none;
+    }
+    .social-admin-item input:focus { border-color: var(--accent); }
+
+    /* save toast */
+    #toast {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      background: #22c55e;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 999;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
+      pointer-events: none;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 840px) {
+      #hero {
+        grid-template-columns: 1fr;
+        padding-top: 0;
+      }
+      .hero-photo-wrap {
+        justify-content: center;
+      }
+      #hero-photo {
+        max-width: 340px;
+      }
+      .hero-copy {
+        text-align: center;
+      }
+      .hero-cta {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .admin-sidebar { width: 140px; min-width: 140px; }
+      .admin-sidebar-item { padding: 0.7rem 1rem; font-size: 0.82rem; }
+      section { padding: 3.5rem 1.25rem; }
+      #hero {
+        min-height: auto;
+        padding-bottom: 3rem;
+      }
+      .hero-photo-wrap {
+        margin-top: 1.5rem;
+      }
+      #hero-photo {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== PORTFOLIO SITE ========== -->
+
+<nav>
+  <div class="nav-logo" id="nav-name">MyPortfolio</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+    <button id="admin-btn">⚙ Admin</button>
+  </div>
+</nav>
+
+<main>
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-copy">
+      <p class="greeting">👋 Hello, I'm</p>
+      <h1><span id="hero-name">Your Name</span></h1>
+      <p id="hero-tagline">A short catchy tagline describing what you do.</p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="#contact" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img id="hero-photo" src="hari2.png" alt="Profile photo" />
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Who I Am</h2>
+    <p id="about-text">Write something about yourself here.</p>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">Skills</p>
+    <h2 class="section-title">What I Work With</h2>
+    <div id="skills-grid"></div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Work</p>
+    <h2 class="section-title">Projects</h2>
+    <div id="projects-grid"></div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact-section">
+    <p class="section-label">Contact</p>
+    <h2 class="section-title">Let's Talk</h2>
+    <a id="contact-email" href="#">your@email.com</a>
+    <p id="contact-note">Open to freelance, full-time, and collaboration opportunities.</p>
+    <div class="social-links" id="social-links-render"></div>
+  </section>
+</main>
+
+<footer>
+  <span id="footer-text">© 2026 Your Name. Built with ❤️</span>
+</footer>
+
+<!-- ========== LOGIN MODAL ========== -->
+<div class="overlay" id="login-overlay">
+  <div class="modal">
+    <button class="close-btn" id="close-login">×</button>
+    <h3>🔐 Admin Login</h3>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="login-password" placeholder="Enter admin password" />
+      <div class="form-error" id="login-error">Incorrect password. Try again.</div>
+    </div>
+    <button class="btn-full" id="login-submit">Login</button>
+  </div>
+</div>
+
+<!-- ========== PROJECT EDIT MODAL ========== -->
+<div class="overlay" id="project-modal-overlay">
+  <div class="modal" style="max-width:560px;">
+    <button class="close-btn" id="close-project-modal">×</button>
+    <h3 id="project-modal-title">Add Project</h3>
+    <div class="form-group">
+      <label>Project Title *</label>
+      <input type="text" id="pm-title" placeholder="My Awesome Project" />
+    </div>
+    <div class="form-group">
+      <label>Description *</label>
+      <textarea id="pm-desc" placeholder="What does this project do?"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Tags (comma-separated)</label>
+      <input type="text" id="pm-tags" placeholder="React, Node.js, MongoDB" />
+    </div>
+    <div class="form-group">
+      <label>Live URL</label>
+      <input type="text" id="pm-live" placeholder="[myproject.com](https://myproject.com)" />
+    </div>
+    <div class="form-group">
+      <label>GitHub URL</label>
+      <input type="text" id="pm-github" placeholder="[github.com](https://github.com/you/repo)" />
+    </div>
+    <input type="hidden" id="pm-index" value="-1" />
+    <button class="btn-full" id="pm-save">Save Project</button>
+  </div>
+</div>
+
+<!-- ========== TOAST ========== -->
+<div id="toast">✓ Saved successfully</div>
+
+<!-- ========== ADMIN PANEL ========== -->
+<div id="admin-panel">
+  <div class="admin-nav">
+    <div class="admin-nav-title">Admin Panel <span>EDITOR</span></div>
+    <div class="admin-nav-actions">
+      <button class="btn-save" id="save-all-btn">💾 Save All</button>
+      <button class="btn-secondary" id="close-admin-btn">← Back to Site</button>
+      <button class="btn-danger" id="logout-btn">Logout</button>
+    </div>
+  </div>
+  <div class="admin-body">
+    <div class="admin-sidebar">
+      <button class="admin-sidebar-item active" data-tab="identity">🪪 Identity</button>
+      <button class="admin-sidebar-item" data-tab="about">👤 About</button>
+      <button class="admin-sidebar-item" data-tab="skills">🛠 Skills</button>
+      <button class="admin-sidebar-item" data-tab="projects">📁 Projects</button>
+      <button class="admin-sidebar-item" data-tab="contact">📬 Contact</button>
+      <button class="admin-sidebar-item" data-tab="settings">⚙ Settings</button>
+    </div>
+    <div class="admin-content">
+
+      <!-- IDENTITY -->
+      <div class="admin-section active" id="tab-identity">
+        <h2>Identity</h2>
+        <p class="subtitle">Your name, tagline, and nav branding.</p>
+        <div class="form-group">
+          <label>Full Name (shown in hero)</label>
+          <input type="text" id="a-name" placeholder="Jane Doe" />
+        </div>
+        <div class="form-group">
+          <label>Nav Logo Text</label>
+          <input type="text" id="a-nav-name" placeholder="JaneDoe.dev" />
+        </div>
+        <div class="form-group">
+          <label>Tagline (hero subtitle)</label>
+          <textarea id="a-tagline" rows="2" placeholder="Full-stack developer crafting clean, scalable web experiences."></textarea>
+        </div>
+      </div>
+
+      <!-- ABOUT -->
+      <div class="admin-section" id="tab-about">
+        <h2>About Me</h2>
+        <p class="subtitle">Write your bio. Shown under "Who I Am".</p>
+        <div class="form-group">
+          <label>Bio / Description</label>
+          <textarea id="a-about" rows="7" placeholder="Tell visitors about yourself..."></textarea>
+        </div>
+      </div>
+
+      <!-- SKILLS -->
+      <div class="admin-section" id="tab-skills">
+        <h2>Skills</h2>
+        <p class="subtitle">Add or remove your skill tags.</p>
+        <div class="skills-admin-list" id="skills-admin-list"></div>
+        <div class="skill-add-row">
+          <input type="text" id="skill-input" placeholder="e.g. TypeScript" />
+          <button class="btn-secondary" id="add-skill-btn">+ Add</button>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="admin-section" id="tab-projects">
+        <h2>Projects</h2>
+        <p class="subtitle">Manage your portfolio projects.</p>
+        <div class="project-list" id="admin-project-list"></div>
+        <button class="btn-secondary" id="add-project-btn">+ Add Project</button>
+      </div>
+
+      <!-- CONTACT -->
+      <div class="admin-section" id="tab-contact">
+        <h2>Contact</h2>
+        <p class="subtitle">Update your contact info and social links.</p>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="a-email" placeholder="you@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Contact Note</label>
+          <input type="text" id="a-contact-note" placeholder="Open to freelance and full-time..." />
+        </div>
+        <div class="form-group">
+          <label>Footer Text</label>
+          <input type="text" id="a-footer" placeholder="© 2026 Your Name." />
+        </div>
+        <hr style="border-color:var(--border);margin:1.5rem 0;">
+        <h3 style="font-size:1rem;margin-bottom:0.5rem;">Social Links</h3>
+        <p class="subtitle">Label and URL pairs (e.g. GitHub → [github.com](https://github.com/you)</p>
+        <div class="social-admin-list" id="social-admin-list"></div>
+        <button class="btn-secondary" id="add-social-btn">+ Add Social Link</button>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="admin-section" id="tab-settings">
+        <h2>Settings</h2>
+        <p class="subtitle">Change your admin password.</p>
+        <div class="form-group">
+          <label>Current Password</label>
+          <input type="password" id="s-current-pw" />
+        </div>
+        <div class="form-group">
+          <label>New Password</label>
+          <input type="password" id="s-new-pw" />
+        </div>
+        <div class="form-group">
+          <label>Confirm New Password</label>
+          <input type="password" id="s-confirm-pw" />
+        </div>
+        <div class="form-error" id="pw-error" style="display:block;margin-bottom:0.75rem;"></div>
+        <button class="btn-save" id="change-pw-btn">Update Password</button>
+        <hr style="border-color:var(--border);margin:2rem 0;">
+        <h3 style="font-size:1rem;margin-bottom:0.5rem;color:#ff4466;">Danger Zone</h3>
+        <p style="font-size:0.85rem;color:var(--muted);margin-bottom:1rem;">
+          Reset all content to defaults. This cannot be undone.
+        </p>
+        <button class="btn-danger" id="reset-btn">Reset All Data</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+//  DEFAULT DATA
+// ============================================================
+const DEFAULTS = {
+  password: 'hari2005',
+  name: 'Hariprasath',
+  navName: 'Hari.',
+  tagline: 'Full-stack developer crafting clean, scalable web experiences.',
+  about: "Hi! I'm Hariprasath — a passionate developer ",
+  skills: ['Java','C','JavaScript','React','Python','Figma','Git'],
+  projects: [
+    
+  ],
+  email: 'vhariprasath2005@gmail.com',
+  contactNote: 'Open to freelance, full-time, and collaboration opportunities.',
+  footer: '© 2026 Hariprasath. Built with ❤️',
+  socials: [
+    { label: 'GitHub', url: '[github.com](https://github.com/Hariprasath-03)' }
+  ]
+};
+
+// ============================================================
+//  STATE & STORAGE
+// ============================================================
+function loadData() {
+  try {
+    const stored = localStorage.getItem('portfolio_data');
+    return stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(DEFAULTS));
+  } catch { return JSON.parse(JSON.stringify(DEFAULTS)); }
+}
+function saveData(data) {
+  localStorage.setItem('portfolio_data', JSON.stringify(data));
+}
+function loadPassword() {
+  return localStorage.getItem('portfolio_pw') || DEFAULTS.password;
+}
+function savePassword(pw) {
+  localStorage.setItem('portfolio_pw', pw);
+}
+
+let data = loadData();
+
+// ============================================================
+//  RENDER PORTFOLIO
+// ============================================================
+function renderPortfolio() {
+  document.getElementById('nav-name').textContent = data.navName || data.name;
+  document.getElementById('hero-name').textContent = data.name;
+  document.getElementById('hero-tagline').textContent = data.tagline;
+  document.getElementById('about-text').textContent = data.about;
+
+  // Skills
+  const sg = document.getElementById('skills-grid');
+  sg.innerHTML = data.skills.map(s => `<span class="skill-tag">${esc(s)}</span>`).join('');
+
+  // Projects
+  const pg = document.getElementById('projects-grid');
+  pg.innerHTML = data.projects.map(p => {
+    const tags = (p.tags || []).map(t => `<span class="project-tag">${esc(t)}</span>`).join('');
+    const links = [
+      p.live ? `<a href="${esc(p.live)}" target="_blank" rel="noopener">🌐 Live</a>` : '',
+      p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener">⭐ GitHub</a>` : ''
+    ].filter(Boolean).join('');
+    return `
+      <div class="project-card">
+        <h3>${esc(p.title)}</h3>
+        <p>${esc(p.desc)}</p>
+        <div class="project-tags">${tags}</div>
+        ${links ? `<div class="project-links">${links}</div>` : ''}
+      </div>`;
+  }).join('');
+
+  // Contact
+  const email = data.email || '';
+  const emailEl = document.getElementById('contact-email');
+  emailEl.href = `mailto:${email}`;
+  emailEl.textContent = email;
+  document.getElementById('contact-note').textContent = data.contactNote;
+  document.getElementById('footer-text').textContent = data.footer;
+
+  // Socials
+  const sl = document.getElementById('social-links-render');
+  sl.innerHTML = (data.socials || []).map(s =>
+    `<a class="social-link" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)}</a>`
+  ).join('');
+}
+
+// ============================================================
+//  ADMIN PANEL — POPULATE FIELDS
+// ============================================================
+function populateAdmin() {
+  document.getElementById('a-name').value = data.name;
+  document.getElementById('a-nav-name').value = data.navName || data.name;
+  document.getElementById('a-tagline').value = data.tagline;
+  document.getElementById('a-about').value = data.about;
+  document.getElementById('a-email').value = data.email;
+  document.getElementById('a-contact-note').value = data.contactNote;
+  document.getElementById('a-footer').value = data.footer;
+  renderSkillsAdmin();
+  renderProjectsAdmin();
+  renderSocialsAdmin();
+}
+
+// ============================================================
+//  SKILLS ADMIN
+// ============================================================
+function renderSkillsAdmin() {
+  const list = document.getElementById('skills-admin-list');
+  list.innerHTML = data.skills.map((s, i) => `
+    <div class="skill-admin-tag">
+      ${esc(s)}
+      <button class="skill-remove" data-i="${i}" title="Remove">×</button>
+    </div>`).join('');
+  list.querySelectorAll('.skill-remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+      data.skills.splice(+btn.dataset.i, 1);
+      renderSkillsAdmin();
+    });
+  });
+}
+
+document.getElementById('add-skill-btn').addEventListener('click', () => {
+  const inp = document.getElementById('skill-input');
+  const val = inp.value.trim();
+  if (val && !data.skills.includes(val)) {
+    data.skills.push(val);
+    renderSkillsAdmin();
+    inp.value = '';
+  }
+  inp.focus();
+});
+document.getElementById('skill-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') document.getElementById('add-skill-btn').click();
+});
+
+// ============================================================
+//  PROJECTS ADMIN
+// ============================================================
+function renderProjectsAdmin() {
+  const list = document.getElementById('admin-project-list');
+  if (!data.projects.length) {
+    list.innerHTML = '<p style="color:var(--muted);font-size:0.88rem;">No projects yet.</p>';
+    return;
+  }
+  list.innerHTML = data.projects.map((p, i) => `
+    <div class="project-list-item">
+      <div class="project-list-item-info">
+        <strong>${esc(p.title)}</strong>
+        <p>${esc(p.desc.length > 70 ? p.desc.slice(0,70)+'…' : p.desc)}</p>
+      </div>
+      <div class="project-list-actions">
+        <button class="btn-edit" data-i="${i}">Edit</button>
+        <button class="btn-del" data-i="${i}">Delete</button>
+      </div>
+    </div>`).join('');
+
+  list.querySelectorAll('.btn-edit').forEach(btn => {
+    btn.addEventListener('click', () => openProjectModal(+btn.dataset.i));
+  });
+  list.querySelectorAll('.btn-del').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (confirm(`Delete "${data.projects[+btn.dataset.i].title}"?`)) {
+        data.projects.splice(+btn.dataset.i, 1);
+        renderProjectsAdmin();
+        saveData(data);
+        renderPortfolio();
+        showToast();
+      }
+    });
+  });
+}
+
+document.getElementById('add-project-btn').addEventListener('click', () => openProjectModal(-1));
+
+function openProjectModal(index) {
+  const isNew = index === -1;
+  document.getElementById('project-modal-title').textContent = isNew ? 'Add Project' : 'Edit Project';
+  document.getElementById('pm-index').value = index;
+  const p = isNew ? { title:'', desc:'', tags:[], live:'', github:'' } : data.projects[index];
+  document.getElementById('pm-title').value = p.title;
+  document.getElementById('pm-desc').value = p.desc;
+  document.getElementById('pm-tags').value = (p.tags || []).join(', ');
+  document.getElementById('pm-live').value = p.live || '';
+  document.getElementById('pm-github').value = p.github || '';
+  document.getElementById('project-modal-overlay').classList.add('active');
+}
+
+document.getElementById('close-project-modal').addEventListener('click', () => {
+  document.getElementById('project-modal-overlay').classList.remove('active');
+});
+document.getElementById('project-modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('project-modal-overlay'))
+    document.getElementById('project-modal-overlay').classList.remove('active');
+});
+
+document.getElementById('pm-save').addEventListener('click', () => {
+  const title = document.getElementById('pm-title').value.trim();
+  const desc  = document.getElementById('pm-desc').value.trim();
+  if (!title || !desc) { alert('Title and description are required.'); return; }
+  const project = {
+    title,
+    desc,
+    tags: document.getElementById('pm-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+    live: document.getElementById('pm-live').value.trim(),
+    github: document.getElementById('pm-github').value.trim()
+  };
+  const idx = +document.getElementById('pm-index').value;
+  if (idx === -1) data.projects.push(project);
+  else data.projects[idx] = project;
+  renderProjectsAdmin();
+  saveData(data);
+  renderPortfolio();
+  document.getElementById('project-modal-overlay').classList.remove('active');
+  showToast();
+});
+
+// ============================================================
+//  SOCIALS ADMIN
+// ============================================================
+function renderSocialsAdmin() {
+  const list = document.getElementById('social-admin-list');
+  list.innerHTML = (data.socials || []).map((s, i) => `
+    <div class="social-admin-item">
+      <input type="text" class="s-label" data-i="${i}" value="${esc(s.label)}" placeholder="Label (e.g. GitHub)" style="max-width:130px;" />
+      <input type="text" class="s-url" data-i="${i}" value="${esc(s.url)}" placeholder="https://..." />
+      <button class="btn-del" data-i="${i}">×</button>
+    </div>`).join('');
+
+  list.querySelectorAll('.s-label').forEach(inp => {
+    inp.addEventListener('input', () => { data.socials[+inp.dataset.i].label = inp.value; });
+  });
+  list.querySelectorAll('.s-url').forEach(inp => {
+    inp.addEventListener('input', () => { data.socials[+inp.dataset.i].url = inp.value; });
+  });
+  list.querySelectorAll('.btn-del').forEach(btn => {
+    btn.addEventListener('click', () => {
+      data.socials.splice(+btn.dataset.i, 1);
+      renderSocialsAdmin();
+    });
+  });
+}
+
+document.getElementById('add-social-btn').addEventListener('click', () => {
+  if (!data.socials) data.socials = [];
+  data.socials.push({ label: '', url: '' });
+  renderSocialsAdmin();
+});
+
+// ============================================================
+//  SAVE ALL
+// ============================================================
+document.getElementById('save-all-btn').addEventListener('click', saveAll);
+
+function saveAll() {
+  data.name         = document.getElementById('a-name').value.trim() || data.name;
+  data.navName      = document.getElementById('a-nav-name').value.trim() || data.navName;
+  data.tagline      = document.getElementById('a-tagline').value.trim();
+  data.about        = document.getElementById('a-about').value.trim();
+  data.email        = document.getElementById('a-email').value.trim();
+  data.contactNote  = document.getElementById('a-contact-note').value.trim();
+  data.footer       = document.getElementById('a-footer').value.trim();
+  // skills & projects & socials already updated in-place
+  saveData(data);
+  renderPortfolio();
+  showToast();
+}
+
+// ============================================================
+//  PASSWORD CHANGE
+// ============================================================
+document.getElementById('change-pw-btn').addEventListener('click', () => {
+  const cur = document.getElementById('s-current-pw').value;
+  const nw  = document.getElementById('s-new-pw').value;
+  const cf  = document.getElementById('s-confirm-pw').value;
+  const err = document.getElementById('pw-error');
+  if (cur !== loadPassword()) { err.textContent = 'Current password is incorrect.'; return; }
+  if (!nw) { err.textContent = 'New password cannot be empty.'; return; }
+  if (nw !== cf) { err.textContent = 'Passwords do not match.'; return; }
+  savePassword(nw);
+  err.style.color = '#22c55e';
+  err.textContent = 'Password updated!';
+  document.getElementById('s-current-pw').value = '';
+  document.getElementById('s-new-pw').value = '';
+  document.getElementById('s-confirm-pw').value = '';
+  setTimeout(() => { err.textContent = ''; err.style.color = ''; }, 3000);
+});
+
+// ============================================================
+//  RESET
+// ============================================================
+document.getElementById('reset-btn').addEventListener('click', () => {
+  if (confirm('Reset ALL portfolio data to defaults? This cannot be undone.')) {
+    data = JSON.parse(JSON.stringify(DEFAULTS));
+    saveData(data);
+    localStorage.removeItem('portfolio_pw');
+    populateAdmin();
+    renderPortfolio();
+    showToast('✓ Reset to defaults');
+  }
+});
+
+// ============================================================
+//  ADMIN TABS
+// ============================================================
+document.querySelectorAll('.admin-sidebar-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.admin-sidebar-item').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ============================================================
+//  LOGIN
+// ============================================================
+document.getElementById('admin-btn').addEventListener('click', () => {
+  document.getElementById('login-password').value = '';
+  document.getElementById('login-error').style.display = 'none';
+  document.getElementById('login-overlay').classList.add('active');
+  setTimeout(() => document.getElementById('login-password').focus(), 100);
+});
+
+document.getElementById('close-login').addEventListener('click', () => {
+  document.getElementById('login-overlay').classList.remove('active');
+});
+document.getElementById('login-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('login-overlay'))
+    document.getElementById('login-overlay').classList.remove('active');
+});
+
+document.getElementById('login-submit').addEventListener('click', attemptLogin);
+document.getElementById('login-password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') attemptLogin();
+});
+
+function attemptLogin() {
+  const pw = document.getElementById('login-password').value;
+  if (pw === loadPassword()) {
+    document.getElementById('login-overlay').classList.remove('active');
+    openAdmin();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    document.getElementById('login-password').value = '';
+    document.getElementById('login-password').focus();
+  }
+}
+
+// ============================================================
+//  OPEN / CLOSE ADMIN
+// ============================================================
+function openAdmin() {
+  populateAdmin();
+  document.getElementById('admin-panel').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('close-admin-btn').addEventListener('click', () => {
+  closeAdmin();
+});
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  if (confirm('Log out of admin panel?')) closeAdmin();
+});
+
+function closeAdmin() {
+  saveAll(); // auto-save on close
+  document.getElementById('admin-panel').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ============================================================
+//  TOAST
+// ============================================================
+let toastTimer;
+function showToast(msg = '✓ Saved successfully') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ============================================================
+//  HELPERS
+// ============================================================
+function esc(str) {
+  return String(str || '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ============================================================
+//  INIT
+// ============================================================
+renderPortfolio();
+</script>
+</body>
+</html>
